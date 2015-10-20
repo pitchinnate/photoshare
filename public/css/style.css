@@ -1,0 +1,61 @@
+.maincontent {
+    border: 2px #eee solid;
+    border-radius: 10px;
+    background-color: #fafafa;
+    padding: 15px;
+}
+.btn-outline {
+    background-color: transparent;
+    color: inherit;
+    transition: all .5s;
+}
+
+.btn-primary.btn-outline {
+    color: #428bca;
+}
+
+.btn-success.btn-outline {
+    color: #5cb85c;
+}
+
+.btn-info.btn-outline {
+    color: #5bc0de;
+}
+
+.btn-warning.btn-outline {
+    color: #f0ad4e;
+}
+
+.btn-danger.btn-outline {
+    color: #d9534f;
+}
+
+.btn-primary.btn-outline:hover,
+.btn-success.btn-outline:hover,
+.btn-info.btn-outline:hover,
+.btn-warning.btn-outline:hover,
+.btn-danger.btn-outline:hover {
+    color: #fff;
+}
+
+.panel-heading h3 {
+    margin: 2px 0px;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.album-tile {
+    margin: 10px;
+}
+
+.thumbnail img.uploadimg {
+    height: 175px;
+    width: auto;
+}
+
+.album-tile img, .album-tile a img {
+    width: auto;
+    height: 150px;
+}
