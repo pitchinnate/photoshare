@@ -7,6 +7,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Mail;
 
 class AuthController extends Controller
 {
@@ -56,11 +57,19 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $newUser = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'is_admin' => 0
         ]);
+        if($newUser->isValid()) {
+            Mail::send('emails.newuser', ['user' => $newUser], function ($m) {
+                $m->to(env('ADMIN_ADDRESS'));
+                $m->subject('New User Registered on KidSportPictures.com');
+            });
+        }
+        
+        return $newUser;
     }
 }

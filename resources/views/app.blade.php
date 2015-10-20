@@ -42,6 +42,9 @@
                     <li><a href="/auth/register">Register</a></li>
                     @else
                     <li><a href="/albums">Albums</a></li>
+                    @if(Request::user()->is_admin == 1)
+                    <li><a href='/user'>Users</a></li>
+                    @endif
 					<li><a href="/auth/logout">Logout</a></li>
                     @endif
 				</ul>

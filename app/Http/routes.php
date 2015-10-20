@@ -3,11 +3,11 @@
 Route::group(['middleware' => ['auth','admin']], function($group) {
     $group->get('/album/new', 'AlbumController@create');
     $group->post('/album/new', 'AlbumController@save');
-    
     $group->get('/album/{id}/upload', 'AlbumController@upload');
     $group->get('/album/{id}/users', 'AlbumController@users');
     $group->post('/album/{id}/user', 'AlbumController@updateUser');
     $group->post('/photo/upload', 'PhotoController@upload');
+    $group->get('/user', 'UserController@index');
 });
 
 Route::group(['middleware' => ['auth','access:album']], function($group) {
