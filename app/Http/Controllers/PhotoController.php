@@ -16,7 +16,7 @@ class PhotoController extends Controller
         $files = $request->file();
         $file = $files['files'][0];
         if(!$file->isValid()) {
-            return (new Response('Invalid Image',400));
+            return (new Response('Invalid Image ' . print_r($files,true),400));
         }
         
         $destinationPath = app()->storagePath() . '/photos/';
