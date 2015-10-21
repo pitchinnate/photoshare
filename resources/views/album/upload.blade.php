@@ -49,7 +49,7 @@
 $(function () {
     'use strict';
     // Change this to the location of your server-side upload handler:
-    var url = '/photo/upload';
+    var url = '/photo/upload/{{ $album->id }}';
     $('#fileupload').fileupload({
         url: url,
         dataType: 'json',

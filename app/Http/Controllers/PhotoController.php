@@ -8,11 +8,13 @@ use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\File\File;
 
 use App\Photo;
+use App\Album;
 
 class PhotoController extends Controller
 {
-    public function upload(Request $request)
+    public function upload(Request $request, $id)
     {
+        $album = Album::findOrFail($id);
         $files = $request->file();
         $file = $files['files'][0];
         if(!$file->isValid()) {
@@ -24,7 +26,7 @@ class PhotoController extends Controller
         $photo = Photo::create([
             'path' => $destinationPath . $file->getFilename(),
             'name' => $file->getClientOriginalName(),
-            'album_id' => 1,
+            'album_id' => $album->id,
         ]);
         $photoArray = $photo->toArray();
         $photoArray['url'] = '/photo/' . $photo->id;
