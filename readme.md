@@ -4,7 +4,7 @@ A simple application written in laravel 5.1 to allow you to share photos with fa
 
 ## Setup
 
-In order to create an administrator go through the registration process then modify the record in the database and set `is_admin=0`. Eventually I'll probably make it so the first person registered will be an administrator. You can make other users administrators from the user list when logged in as an administrator.
+In order to create an administrator go through the registration process then modify the record in the database and set `is_admin` value to `1`. Eventually I'll probably make it so the first person registered will be an administrator. You can make other users administrators from the user list when logged in as an administrator.
 
 ### License
 
