@@ -59,3 +59,43 @@
     width: auto;
     height: 150px;
 }
+
+.leftarrow, .rightarrow {
+    height: 100%;
+    width: 50px;
+    background: none;
+    position: absolute;
+    z-index: 10;
+    text-align: center;
+}
+.leftarrow {
+    margin-right: -50px;
+}
+.rightarrow {
+    left: 100%;
+    margin-left: -50px;
+}
+.leftarrow:hover, .rightarrow:hover {
+    background-color: rgba(0,0,0,0.3);
+}
+.leftarrow a, .rightarrow a {
+    position: relative;
+    color: white;
+    text-decoration: none;
+    line-height: 50;
+    height: 100%;
+    vertical-align: middle;
+    display: none;
+}
+.leftarrow:hover a, .rightarrow:hover a {
+    display: block;
+}
+
+.bigimg {
+    position: relative;
+    z-index: 1;
+}
+.imgcontainer {
+    height: 100%;
+    position: relative;
+}

@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\File\File;
 
+use Intervention\Image\ImageManagerStatic as Image;
+
 use App\Photo;
 use App\Album;
 
@@ -46,10 +48,51 @@ class PhotoController extends Controller
         return response()->download($photo->path, $photo->name, $headers);
     }
     
-    public function view(Request $request, $id)
+    public function thumb(Request $request, $id) 
     {
+        $photo = Photo::findOrFail($id);
+        $file = new File($photo->path);
+        if(!is_file($photo->path . '.' . $file->guessExtension())) {
+            $image = Image::make($photo->path);
+            $percent = 175 / $image->getHeight();
+            $width = $image->getWidth() * $percent;
+            $image->resize(floor($width), 175);
+            $image->save($photo->path . '.' . $file->guessExtension());
+        }
+        $headers = array(
+            'Content-Type: ' . $file->getMimeType(),
+        );
+        return response()->download($photo->path . '.' . $file->guessExtension(), $photo->name, $headers);
+    }
+    
+    public function view(Request $request, $id, $move = null)
+    {
+        $photo = Photo::findOrFail($id);
+        if($move) {
+            $photos = $photo->album->photos->keyBy('id');
+            $keys = $photos->keys()->all();
+            foreach($keys as $index => $key) {
+                if($key == $id) {
+                    $photoIndex = $index;
+                    break;
+                }
+            }
+            if($move == 'next') {
+                $photoIndex += 1;
+            }
+            if($move == 'prev') {
+                $photoIndex -= 1;
+            }
+            if($photoIndex < 0) {
+                $photoIndex = count($keys) - 1;
+            }
+            if($photoIndex == count($keys)) {
+                $photoIndex = 0;
+            }
+            return redirect('/photo/view/'. $keys[$photoIndex]);
+        }
         return view('photo.view',[
-            'photo' => Photo::findOrFail($id),
+            'photo' => $photo,
         ]);
     }
 }

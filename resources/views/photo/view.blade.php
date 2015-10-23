@@ -11,7 +11,17 @@
 @section('content_body')
 
 <div class="container-fluid">
-    <img src="{{$photo->getUrl()}}" style='max-width: 100%;' />
+    <div class="row">
+        <div class="imgcontainer">
+            <div class="leftarrow">
+                <a href="/photo/view/{{ $photo->id}}/prev">prev</a>
+            </div>
+            <div class="rightarrow">
+                <a href="/photo/view/{{ $photo->id}}/next">next</a>
+            </div>
+            <img src="{{$photo->getUrl()}}" style='max-width: 100%;' class="bigimg" />
+        </div>
+    </div>
 </div>
 
 @endsection

@@ -16,7 +16,9 @@ Route::group(['middleware' => ['auth','access:album']], function($group) {
 
 Route::group(['middleware' => ['auth','access:photo']], function($group) {
     $group->get('/photo/{id}', 'PhotoController@download');
+    $group->get('/photo/thumb/{id}', 'PhotoController@thumb');
     $group->get('/photo/view/{id}', 'PhotoController@view');
+    $group->get('/photo/view/{id}/{move}', 'PhotoController@view');
 });
 
 Route::group(['middleware' => 'auth'], function($group) {

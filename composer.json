@@ -8,7 +8,8 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
         "watson/validating": "^1.0",
-        "blueimp/jquery-file-upload": "^9.11"
+        "blueimp/jquery-file-upload": "^9.11",
+        "intervention/image": "^2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

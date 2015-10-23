@@ -39,4 +39,8 @@ class Photo extends Model
     {
         return '/photo/' . $this->id;
     }
+    public function getThumbnail()
+    {
+        return '/photo/thumb/' . $this->id;
+    }
 }

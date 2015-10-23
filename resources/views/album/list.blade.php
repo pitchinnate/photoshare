@@ -15,7 +15,7 @@
             <div class="thumbnail pull-left album-tile">
                 <a href="/album/{{ $album->id }}">
                     @if($album->photos()->count() > 0)
-                    <img src="{{$album->photos[0]->getUrl()}}" class="img-rounded" />
+                    <img src="{{$album->photos[0]->getThumbnail()}}" class="img-rounded" />
                     @else
                     <img src="/img/missing.jpg" class="img-rounded" />
                     @endif

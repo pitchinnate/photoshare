@@ -14,10 +14,7 @@
 <div class="container-fluid">
     @foreach($album->photos as $photo)
         <a href="/photo/view/{{ $photo->id }}" class="thumbnail pull-left album-tile">
-            <img src="{{$photo->getUrl()}}" class="img-rounded" />
-            <div class="caption center-text">
-                {{$photo->name}}
-            </div>
+            <img src="{{$photo->getThumbnail()}}" class="img-rounded" />
         </a>
     @endforeach
     @if($album->photos()->count() == 0)
