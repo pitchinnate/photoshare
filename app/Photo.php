@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Watson\Validating\ValidatingTrait;
+use Symfony\Component\HttpFoundation\File\File;
+use Intervention\Image\ImageManagerStatic as Image;
 
 /**
  * @property integer $id
@@ -42,5 +44,17 @@ class Photo extends Model
     public function getThumbnail()
     {
         return '/photo/thumb/' . $this->id;
+    }
+    
+    public function makeThumbnail()
+    {
+        $file = new File($this->path);
+        if(!is_file($this->path . '.' . $file->guessExtension())) {
+            $image = Image::make($this->path);
+            $percent = 175 / $image->getHeight();
+            $width = $image->getWidth() * $percent;
+            $image->resize(floor($width), 175);
+            $image->save($this->path . '.' . $file->guessExtension());
+        }
     }
 }

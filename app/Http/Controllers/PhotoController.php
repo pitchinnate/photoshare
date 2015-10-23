@@ -32,6 +32,7 @@ class PhotoController extends Controller
         ]);
         $photoArray = $photo->toArray();
         $photoArray['url'] = '/photo/' . $photo->id;
+        $photo->makeThumbnail();
         return [
             'status' => 'done',
             'files' => [$photoArray],
@@ -52,13 +53,7 @@ class PhotoController extends Controller
     {
         $photo = Photo::findOrFail($id);
         $file = new File($photo->path);
-        if(!is_file($photo->path . '.' . $file->guessExtension())) {
-            $image = Image::make($photo->path);
-            $percent = 175 / $image->getHeight();
-            $width = $image->getWidth() * $percent;
-            $image->resize(floor($width), 175);
-            $image->save($photo->path . '.' . $file->guessExtension());
-        }
+        $photo->makeThumbnail();
         $headers = array(
             'Content-Type: ' . $file->getMimeType(),
         );
