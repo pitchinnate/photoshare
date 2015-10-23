@@ -21,9 +21,11 @@
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
                 <td>{{ date('F j, Y', strtotime($user->created_at)) }}</td>
-                <td>
+                <td style="text-align: right;">
                     @if($user->is_admin == 1)
-                    <div class='badge'>ADMIN</div>
+                    <div class='label label-success label-as-badge'>ADMIN</div>
+                    @else
+                    <a href="/user/admin/{{$user->id}}" class="btn btn-xs btn-default">Make Admin</a>
                     @endif
                 </td>
             </tr>

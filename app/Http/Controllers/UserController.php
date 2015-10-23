@@ -14,4 +14,12 @@ class UserController extends Controller
             'users' => User::all(),
         ]);
     }
+    
+    public function admin(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $user->update(['is_admin'=>1]);
+        
+        return redirect('/user');
+    }
 }

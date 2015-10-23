@@ -8,6 +8,7 @@ Route::group(['middleware' => ['auth','admin']], function($group) {
     $group->post('/album/{id}/user', 'AlbumController@updateUser');
     $group->post('/photo/upload/{id}', 'PhotoController@upload');
     $group->get('/user', 'UserController@index');
+    $group->get('/user/admin/{id}', 'UserController@admin');
 });
 
 Route::group(['middleware' => ['auth','access:album']], function($group) {
