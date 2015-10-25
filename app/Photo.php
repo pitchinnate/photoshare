@@ -78,4 +78,5 @@ class Photo extends Model
         rename($newfilePath, $this->path);
         $this->makeThumbnail();
     }
+    
 }

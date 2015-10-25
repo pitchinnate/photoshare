@@ -64,30 +64,17 @@ class PhotoController extends Controller
     {
         $photo = Photo::findOrFail($id);
         if($move) {
-            $photos = $photo->album->photos->keyBy('id');
-            $keys = $photos->keys()->all();
-            foreach($keys as $index => $key) {
-                if($key == $id) {
-                    $photoIndex = $index;
-                    break;
-                }
-            }
             if($move == 'next') {
-                $photoIndex += 1;
+                $newPhoto = $photo->album->nextPhoto($id);
+            } else {
+                $newPhoto = $photo->album->prevPhoto($id);
             }
-            if($move == 'prev') {
-                $photoIndex -= 1;
-            }
-            if($photoIndex < 0) {
-                $photoIndex = count($keys) - 1;
-            }
-            if($photoIndex == count($keys)) {
-                $photoIndex = 0;
-            }
-            return redirect('/photo/view/'. $keys[$photoIndex]);
+            return redirect('/photo/view/'. $newPhoto->id);
         }
+        $pageNumber = $photo->album->getPageNumber($photo->id);
         return view('photo.view',[
             'photo' => $photo,
+            'pageNumber' => $pageNumber,
         ]);
     }
     

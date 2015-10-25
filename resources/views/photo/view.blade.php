@@ -7,7 +7,7 @@
         <a href="/photo/rotate/{{ $photo->id }}/-90" class="btn btn-default"><i class='fa fa-repeat'></i> Rotate</a>
         <a href="/photo/rotate/{{ $photo->id }}/90" class="btn btn-default"><i class='fa fa-undo'></i> Rotate</a>
         @endif
-        <a href="/album/{{ $photo->album_id }}" class="btn btn-default"><i class='fa fa-arrow-left'></i> Back</a>
+        <a href="/album/{{ $photo->album_id }}/{{ $pageNumber }}" class="btn btn-default"><i class='fa fa-arrow-left'></i> Back</a>
         <a href="/photo/{{ $photo->id }}" class="btn btn-primary"><i class='fa fa-download'></i> Download Image</a>
     </div>
     <h3>{{ $photo->album->name }}:  {{$photo->name}}</h3>

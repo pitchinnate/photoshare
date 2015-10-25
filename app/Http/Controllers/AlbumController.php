@@ -24,10 +24,14 @@ class AlbumController extends Controller
         ]);
     }
     
-    public function view(Request $request, $id)
-    {
+    public function view(Request $request, $id, $page = 1)
+    {        
+        $album = Album::findOrFail($id);
+        $pages = ceil($album->photos()->count() / env('PAGE_SIZE',15));
         return view('album.view',[
-            'album' => Album::findOrFail($id),
+            'album' => $album,
+            'page' => $page,
+            'pages' => $pages,
         ]);
     }
     

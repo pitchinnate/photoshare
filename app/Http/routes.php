@@ -15,6 +15,7 @@ Route::group(['middleware' => ['auth','admin']], function($group) {
 
 Route::group(['middleware' => ['auth','access:album']], function($group) {
     $group->get('/album/{id}', 'AlbumController@view');
+    $group->get('/album/{id}/{page}', 'AlbumController@view');
 });
 
 Route::group(['middleware' => ['auth','access:photo']], function($group) {
