@@ -60,11 +60,15 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+        $is_admin = 0;
+        if(User::all()->count() == 0) {
+            $is_admin = 1;
+        }
         $newUser = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'is_admin' => 0
+            'is_admin' => $is_admin
         ]);
         if($newUser->isValid()) {
             Mail::send('emails.newuser', ['user' => $newUser], function ($m) {
