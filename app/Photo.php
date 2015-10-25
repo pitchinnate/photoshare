@@ -57,4 +57,25 @@ class Photo extends Model
             $image->save($this->path . '.' . $file->guessExtension());
         }
     }
+    
+    public function removeThumbnail()
+    {
+        $file = new File($this->path);
+        if(is_file($this->path . '.' . $file->guessExtension())) {
+            unlink($this->path . '.' . $file->guessExtension());
+        }
+    }
+    
+    public function rotate($angle)
+    {
+        $this->removeThumbnail();
+        $file = new File($this->path);
+        $newfilePath = $this->path . 'new.' . $file->guessExtension();
+        $image = Image::make($this->path);
+        $image->rotate($angle);
+        $image->save($newfilePath);
+        unlink($this->path);
+        rename($newfilePath, $this->path);
+        $this->makeThumbnail();
+    }
 }

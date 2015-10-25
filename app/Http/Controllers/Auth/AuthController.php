@@ -9,6 +9,9 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Mail;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 class AuthController extends Controller
 {
     /*
@@ -69,7 +72,29 @@ class AuthController extends Controller
                 $m->subject('New User Registered on KidSportPictures.com');
             });
         }
-        
         return $newUser;
+    }
+    
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postRegister(Request $request)
+    {
+        $validator = $this->validator($request->all());
+
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
+        Auth::login($this->create($request->all()));
+        
+        $request->session()->flash('success', 'You have successfully registered for an account. When you have been approved to view an album you will receive and email lettting you know.');
+
+        return redirect($this->redirectPath());
     }
 }

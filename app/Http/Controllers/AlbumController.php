@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 
 use App\Album;
 use App\User;
+use Mail;
 
 class AlbumController extends Controller
 {
@@ -70,6 +71,11 @@ class AlbumController extends Controller
         $data = $request->input('album_user',[]);
         if($data['access'] == 1) {
             $album->users()->attach($data['user']);
+            $user = User::find($data['user']);
+            Mail::send('emails.authorized', ['user' => $user, 'album' => $album], function ($m) use ($user) {
+                $m->to($user->email);
+                $m->subject('Granted Access to Album');
+            });
         } else {
             $album->users()->detach($data['user']);
         }

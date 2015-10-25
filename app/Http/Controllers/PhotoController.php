@@ -90,4 +90,21 @@ class PhotoController extends Controller
             'photo' => $photo,
         ]);
     }
+    
+    public function rotate(Request $request, $id, $angle)
+    {
+        $photo = Photo::findOrFail($id);
+        $photo->rotate($angle);
+        return redirect('/photo/view/' . $id);
+    }
+    
+    public function delete(Request $request, $id)
+    {
+        $photo = Photo::findOrFail($id);
+        $photo->removeThumbnail();
+        unlink($photo->path);
+        $albumId = $photo->album_id;
+        $photo->delete();
+        return redirect('/album/' . $albumId);
+    }
 }
