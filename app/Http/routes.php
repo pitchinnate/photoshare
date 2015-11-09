@@ -10,6 +10,8 @@ Route::group(['middleware' => ['auth','admin']], function($group) {
     $group->get('/photo/rotate/{id}/{angle}', 'PhotoController@rotate');
     $group->get('/photo/delete/{id}', 'PhotoController@delete');
     $group->get('/user', 'UserController@index');
+    $group->get('/user/invite', 'UserController@invite');
+    $group->post('/user/invite', 'UserController@invitePost');
     $group->get('/user/admin/{id}', 'UserController@admin');
 });
 
@@ -29,6 +31,8 @@ Route::group(['middleware' => 'auth'], function($group) {
     $group->get('/', 'AlbumController@index');
     $group->get('/home', 'AlbumController@index');
     $group->get('/albums', 'AlbumController@index');
+    $group->get('/password/update', 'Auth\PasswordController@getUpdate');
+    $group->post('/password/update', 'Auth\PasswordController@postUpdate');
 });
 
 Route::get('/auth/logout','Auth\AuthController@getLogout');
@@ -41,3 +45,5 @@ Route::get('/password/email','Auth\PasswordController@getEmail');
 Route::post('/password/email','Auth\PasswordController@postEmail');
 Route::get('/password/reset/{token}','Auth\PasswordController@getReset');
 Route::post('/password/reset','Auth\PasswordController@postReset');
+Route::get('/user/invited',['as' => 'user.invited','uses'=>'UserController@getInvited']);
+Route::post('/user/invited','UserController@postInvited');

@@ -28,14 +28,14 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         Authorizable,
         CanResetPassword;
 
-use ValidatingTrait;
+    use ValidatingTrait;
 
     protected $table = 'users';
     protected $fillable = ['name', 'email', 'password', 'remember_token', 'is_admin'];
     protected $hidden = ['password', 'remember_token'];
     protected $rules = ['name' => 'max:255|string',
-        'email' => 'max:255|string',
-        'password' => 'max:60|string',
+        'email' => 'max:255|string|unique:users,email',
+        'password' => 'max:60|string|min:6',
         'remember_token' => 'max:100|string',
         'is_admin' => 'integer|min:0|required'];
 
