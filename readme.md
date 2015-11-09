@@ -10,6 +10,7 @@ A simple application written in laravel 5.1 to allow you to share photos with fa
 - Delete photos
 - Download photos
 - Multiple Administrators
+- Email Invites
 
 ## Setup
 
@@ -19,7 +20,7 @@ The first person registered will automatically be made an administrator. You can
 
 ####Admin Email
 
-The administrator email wher emails will be sent for notifications of new user signups can be set in your environment variable `ADMIN_ADDRESS`.
+The administrator email where emails will be sent for notifications of new user signups can be set in your environment variable `ADMIN_ADDRESS`.
 
 ####Album Page Size
 
