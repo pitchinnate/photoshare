@@ -11,6 +11,7 @@ A simple application written in laravel 5.1 to allow you to share photos with fa
 - Download photos
 - Multiple Administrators
 - Email Invites
+- Email Notifications
 
 ## Setup
 
