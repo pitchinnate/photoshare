@@ -25,7 +25,8 @@
                         <h5>{{$album->name}}</h5>
                     </a>
                     @if(Request::user()->is_admin == 1)
-                    <a href="/album/{{ $album->id }}/users" class="btn btn-primary"><i class='fa fa-users'></i> Authorized Users</a>
+                    <a href="/album/{{ $album->id }}/users" class="btn btn-primary"><i class='fa fa-users'></i> Authorized Users</a><br>
+                    <a href="/album/{{ $album->id }}/notify" class="btn btn-primary" style="margin-top: 5px;"><i class='fa fa-envelope'></i> Email Users</a>
                     @endif
                 </div>
             </div>

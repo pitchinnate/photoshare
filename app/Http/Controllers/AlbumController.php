@@ -85,4 +85,37 @@ class AlbumController extends Controller
         }
         return (new Response('',200));
     }
+    
+    public function getNotify(Request $request, $id)
+    {
+        /* @var $album \App\Album */
+        $album = Album::findOrFail($id);
+        return view('album.notify',[
+            'album' => $album,
+            'users' => $album->users,
+        ]);
+    }
+    
+    public function postNotify(Request $request, $id)
+    {
+        /* @var $album \App\Album */
+        $album = Album::findOrFail($id);
+        $user_ids = $request->input('user',[]);
+        $subject = $request->input('subject','');
+        $message = $request->input('message','');
+        $emails_sent = 0;
+        
+        foreach($user_ids as $user_id) {
+            $user = User::find($user_id);
+            if($user) {
+                $emails_sent++;
+                Mail::raw($message, function ($m) use ($user,$subject) {
+                    $m->to($user->email);
+                    $m->subject($subject);
+                });
+            }
+        }
+        
+        return redirect('/albums')->with('success',"$emails_sent messages sent.");
+    }
 }

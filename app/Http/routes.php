@@ -6,6 +6,8 @@ Route::group(['middleware' => ['auth','admin']], function($group) {
     $group->get('/album/{id}/upload', 'AlbumController@upload');
     $group->get('/album/{id}/users', 'AlbumController@users');
     $group->post('/album/{id}/user', 'AlbumController@updateUser');
+    $group->get('/album/{id}/notify', 'AlbumController@getNotify');
+    $group->post('/album/{id}/notify', 'AlbumController@postNotify');
     $group->post('/photo/upload/{id}', 'PhotoController@upload');
     $group->get('/photo/rotate/{id}/{angle}', 'PhotoController@rotate');
     $group->get('/photo/delete/{id}', 'PhotoController@delete');
