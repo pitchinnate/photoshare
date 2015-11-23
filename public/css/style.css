@@ -1,5 +1,6 @@
 body {
     font-family: 'Lato', sans-serif;
+    background-image: url('../img/background.jpg');
 }
 .maincontent {
     border: 2px #eee solid;
